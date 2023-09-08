@@ -9,3 +9,8 @@ vscode配置python内核
     Ctrl+Shift+P
     Python:select interpreter
     选择虚拟环境中的python.exe位置（一般位于Scripts中）
+
+jupyter notebook版本问题会导致输出html文件受到影响
+    pip install jupyter notebook==6.1.0
+    该版本可以正常运行
+
