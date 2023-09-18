@@ -9,6 +9,8 @@
 3.贝叶斯优化(Bayes-optimzie)
   SMBO是其实现形式
   代理模型
+    GPR
+    TPE ----- 更加主流
     对历史观测进行建模
   采样函数
     探索，探索更多可能出现的最小值点
@@ -18,5 +20,5 @@
 
   库
   hyperopt
-  optuna
+  optuna ----- 更加专业
   
