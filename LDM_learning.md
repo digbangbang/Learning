@@ -54,7 +54,7 @@ Using the loss above and the Discriminator, then training the Encoder and Decode
 
 ## [UNet](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/modules/diffusionmodules/openaimodel.py#L413)
 
-In text2image, this UNet could process 3 types of datainput:
+In [text2image](https://github.com/CompVis/latent-diffusion/blob/main/configs/latent-diffusion/txt2img-1p4B-eval.yaml), this UNet could process 3 types of datainput:
 
 - x (image)
 - t (timestep)
