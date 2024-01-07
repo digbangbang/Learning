@@ -86,7 +86,30 @@ When the layerinput is the type of TimestepBlock, it will process the `x` and th
 
 ### [ResBlock](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/modules/diffusionmodules/openaimodel.py#L163)
 
-### [AttentionBlock]()
+The ResBlock is used to process the `x` and the `t` and this block can change the channels by upsample and downsample.
 
-### [SpatialTransformer]()
+In the UNet structure, when it is the downsampling process, there are two type ResBlock. One is that only change the channel, other is that also change the size.
+
+Downsample uses the convolution or average pooling to change the size. Upsample uses the interpolate to revoer the size.
+
+### [AttentionBlock](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/modules/diffusionmodules/openaimodel.py#L278C7-L278C21)
+
+The AttentionBlock is used to process only the `x`, and only used when it is need in [attention_resolutions](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/configs/latent-diffusion/txt2img-1p4B-eval.yaml#L27).
+
+### [SpatialTransformer](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/modules/attention.py#L218)
+
+The SpatialTransformer is used to process the `x` and the `context`, and the crossattention is added into the SpatialTransformer.
+
+In the crossattention, the Q represents the `x`, the K and the V represents the `context`. If there is no `context`, then it will become the self-attention.
+
+
+<p align="center">
+  <img src="https://github.com/digbangbang/Learning/assets/78746384/f405de99-241d-41cb-a767-ec2969b1a971" alt="UNet">
+</p>
+
+<p align="center">
+  <img src="https://github.com/digbangbang/Learning/assets/78746384/4a8b4e02-bbaa-4607-9c84-fea009bba0e8" alt="legend">
+</p>
+
+
 ## LDM
