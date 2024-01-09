@@ -113,3 +113,29 @@ In the crossattention, the Q represents the `x`, the K and the V represents the 
 
 
 ## LDM
+
+### Using [EMA](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L90) to update the parameters
+
+$$ S_t = \beta \cdot S_{t-1} + (1 - \beta) \cdot X_t $$
+
+In nn.Module, using `self.register_buffer()` to save parameters and update without backpropagation. And the saved $S_t$ will be called the shadow parameters. $X_t$ is the original parameters, which can be updated by backpropagation.
+
+#### EMA advantage:
+- Smooth the change trend of model parameters
+- Improve the robustness of the model
+- Preventing overfitting
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
