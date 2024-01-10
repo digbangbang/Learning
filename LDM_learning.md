@@ -111,6 +111,49 @@ In the crossattention, the Q represents the `x`, the K and the V represents the 
   <img src="https://github.com/digbangbang/Learning/assets/78746384/4a8b4e02-bbaa-4607-9c84-fea009bba0e8" alt="legend">
 </p>
 
+## [BERTEmbedder](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/modules/encoders/modules.py#L80)
+
+### Using [BERTTokenizer](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/modules/encoders/modules.py#L87) to map the text into integer
+
+#### Example:
+```python
+from transformers import BertTokenizerFast
+
+# Create a BertTokenizerFast object and load the vocabulary of the pretrained BERT model
+tokenizer = BertTokenizerFast.from_pretrained("bert-base-uncased")
+
+# Input text
+input_text = "Hugging Face Transformers library is awesome!"
+
+# Step1：tokenize
+tokens = tokenizer.tokenize(input_text)
+# output: ['hugging', 'face', 'transformers', 'library', 'is', 'awesome', '!']
+
+# Step2：add special sign
+tokens = ["[CLS]"] + tokens + ["[SEP]"]
+# output: ['[CLS]', 'hugging', 'face', 'transformers', 'library', 'is', 'awesome', '!', '[SEP]']
+
+# Step3：encode
+input_ids = tokenizer.convert_tokens_to_ids(tokens)
+# output: [101, 17662, 2227, 17061, 4603, 2003, 12476, 999, 102]
+
+# Step4：padding and truncation
+# Suppose the model requires an input length of 10, we pad or truncate to meet this length
+max_length = 10
+input_ids = input_ids[:max_length] + [0] * (max_length - len(input_ids))
+# output: [101, 17662, 2227, 17061, 4603, 2003, 12476, 999, 102, 0]
+
+# Final
+print("Original text:", input_text)
+print("Processed tokens:", tokens)
+print("Processed input_ids:", input_ids)
+```
+
+### Using [Transformer](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/modules/encoders/modules.py#L89) to embedding the token(already map to the input_ids)
+
+
+
+
 
 ## LDM
 
