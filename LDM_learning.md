@@ -125,6 +125,52 @@ In nn.Module, using `self.register_buffer()` to save parameters and update witho
 - Improve the robustness of the model
 - Preventing overfitting
 
+### Using [Variational Lower Bound](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L314) to strengthen the loss
+
+#### [$L1$ or $L2$ loss in DDPM's UNet](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L307)
+
+This can also be called $L_{simple}$
+
+$$\mathbb{E} _{\mathbf{x} _0, \boldsymbol{\epsilon}} \left \| \boldsymbol{\epsilon}-\boldsymbol{\epsilon} _\theta\left(\sqrt{\bar{\alpha} _t} \mathbf{x} _0+\sqrt{1-\bar{\alpha} _t} \boldsymbol{\epsilon}, t\right) \right \| \quad or \quad \mathbb{E} _{\mathbf{x} _0, \boldsymbol{\epsilon}} \left \| \left \| \boldsymbol{\epsilon}-\boldsymbol{\epsilon} _\theta\left(\sqrt{\bar{\alpha} _t} \mathbf{x} _0+\sqrt{1-\bar{\alpha} _t} \boldsymbol{\epsilon}, t\right) \right \|\right \|^2$$
+
+#### Variational Lower Bound in DDPM
+
+$$\mathbb{E} _{\mathbf{x} _0, \boldsymbol{\epsilon}}\left[\frac{\beta _t^2}{2 \sigma _t^2 \alpha _t\left(1-\bar{\alpha} _t\right)}\left\|\boldsymbol{\epsilon}-\boldsymbol{\epsilon} _\theta\left(\sqrt{\bar{\alpha} _t} \mathbf{x} _0+\sqrt{1-\bar{\alpha} _t} \boldsymbol{\epsilon}, t\right)\right\|^2\right]$$
+
+$L_{simple}$ and $L_{VLB}$ are different in the weight.
+
+#### [Loss in DDPM](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L294)
+
+```python
+def p_losses(self, x_start, t, noise=None):
+        noise = default(noise, lambda: torch.randn_like(x_start))
+        x_noisy = self.q_sample(x_start=x_start, t=t, noise=noise)
+        model_out = self.model(x_noisy, t)
+
+        loss_dict = {}
+        if self.parameterization == "eps":
+            target = noise
+        elif self.parameterization == "x0":
+            target = x_start
+        else:
+            raise NotImplementedError(f"Paramterization {self.parameterization} not yet supported")
+
+        loss = self.get_loss(model_out, target, mean=False).mean(dim=[1, 2, 3])
+
+        log_prefix = 'train' if self.training else 'val'
+
+        loss_dict.update({f'{log_prefix}/loss_simple': loss.mean()})
+        loss_simple = loss.mean() * self.l_simple_weight
+
+        loss_vlb = (self.lvlb_weights[t] * loss).mean()
+        loss_dict.update({f'{log_prefix}/loss_vlb': loss_vlb})
+
+        loss = loss_simple + self.original_elbo_weight * loss_vlb
+
+        loss_dict.update({f'{log_prefix}/loss': loss})
+
+        return loss, loss_dict
+```
 
 
 
