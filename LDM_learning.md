@@ -127,7 +127,7 @@ In nn.Module, using `self.register_buffer()` to save parameters and update witho
 
 ### Using [Variational Lower Bound](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L314) to strengthen the loss
 
-#### [$L1$ or $L2$ loss in DDPM's UNet](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L307)
+#### $L1$ or $L2$ [loss](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L307) in DDPM's UNet
 
 This can also be called $L_{simple}$
 
