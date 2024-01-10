@@ -62,7 +62,7 @@ In [text2image](https://github.com/CompVis/latent-diffusion/blob/main/configs/la
 
 This defines a class that facilitates processing of multiple data forms:
 
-```
+```python
 class TimestepEmbedSequential(nn.Sequential, TimestepBlock):
     """
     A sequential module that passes timestep embeddings to the children that
