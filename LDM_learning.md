@@ -151,9 +151,9 @@ print("Processed input_ids:", input_ids)
 
 ### Using [Transformer](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/modules/encoders/modules.py#L89) to embedding the token(already map to the input_ids)
 
+From BERTTokenizer, text's shape didn't change, keeping the (batch_size, num_sequence). 
 
-
-
+Then going through the [TransformerWrapper](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/modules/x_transformer.py#L548C7-L548C25), the output's shape will become (batch_size, num_sequence, dim).
 
 ## LDM
 
