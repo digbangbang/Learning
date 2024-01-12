@@ -219,7 +219,12 @@ def p_losses(self, x_start, t, noise=None):
         return loss, loss_dict
 ```
 
+### Training process in LDM
 
+
+
+
+### Sampling process in LDM
 
 
 
