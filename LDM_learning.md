@@ -155,6 +155,10 @@ From BERTTokenizer, text's shape didn't change, keeping the (batch_size, num_seq
 
 Then going through the [TransformerWrapper](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/modules/x_transformer.py#L548C7-L548C25), the output's shape will become (batch_size, num_sequence, dim).
 
+<p align="center">
+  <img src="https://github.com/digbangbang/Learning/assets/78746384/0e6418b4-e576-42ff-b89c-d566c0bfd8ca" alt="legend">
+</p>
+
 ## LDM
 
 ### Using [EMA](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L90) to update the parameters
