@@ -221,10 +221,57 @@ def p_losses(self, x_start, t, noise=None):
 
 ### Training process in LDM
 
+In pytorch_lightning structure, `training_step` defined the training process and returned the loss.
+
+First, [LatentDiffusion class]() inherits the DDPM class, and LatentDiffusion didn't define the `training_step`. That is: LatentDiffusion continues using the DDPM's `training_step`, so let's talk about it.
+
+#### DDPM's and LatentDiffusion's `training_step`: 
+
+```python
+def training_step(self, batch, batch_idx):
+    loss, loss_dict = self.shared_step(batch)
+
+    self.log_dict(loss_dict, prog_bar=True,
+                  logger=True, on_step=True, on_epoch=True)
+
+    self.log("global_step", self.global_step,
+             prog_bar=True, logger=True, on_step=True, on_epoch=False)
+
+    if self.use_scheduler:
+        lr = self.optimizers().param_groups[0]['lr']
+        self.log('lr_abs', lr, prog_bar=True, logger=True, on_step=True, on_epoch=False)
+
+    return loss
+```
+
+So, the point is the `shared_step` in LatentDiffusion, which defines the data_input process and calls the forward procedure.
+
+#### LatentDiffusion's `shared_step`:
+
+**`get_input` function to transfer the x(original picture data) into z(latent variable) and get the c(condition)**
+
+- batch['image'] -> x --encode_first_stage--> encoder_posterior --sample--> z
+
+- batch['caption'] -> xc -> c
+
+**`forward` function to calculate the p_losses**
+
+- generate t(time_step)
+
+- c --cond_stage_model--encode--> c
+
+**calculate p_losses by using z, c, t in `forward`**
+
+Here z is the z0, 
+
+z0 --[q_sample](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L1014)--> zt --model--> znoise_pred
+
+calculate the loss between znoise_pred and noise(Gaussian Distribution)
+
+### Sampling process in LDM: [log_images]([https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L1217](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L1251)https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L1251) containing the zsampling and decode
 
 
 
-### Sampling process in LDM
 
 
 
