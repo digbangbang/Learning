@@ -248,6 +248,13 @@ So, the point is the `shared_step` in LatentDiffusion, which defines the data_in
 
 #### LatentDiffusion's `shared_step`:
 
+```python
+def shared_step(self, batch, **kwargs):
+    x, c = self.get_input(batch, self.first_stage_key)
+    loss = self(x, c)
+    return loss
+```
+
 **`get_input` function to transfer the x(original picture data) into z(latent variable) and get the c(condition)**
 
 - batch['image'] -> x --encode_first_stage--> encoder_posterior --sample--> z
@@ -262,15 +269,28 @@ So, the point is the `shared_step` in LatentDiffusion, which defines the data_in
 
 **calculate p_losses by using z, c, t in `forward`**
 
+```python
+def forward(self, x, c, *args, **kwargs):
+    t = torch.randint(0, self.num_timesteps, (x.shape[0],), device=self.device).long()
+    if self.model.conditioning_key is not None:
+        assert c is not None
+        if self.cond_stage_trainable:
+            c = self.get_learned_conditioning(c)
+        if self.shorten_cond_schedule:  # TODO: drop this option
+            tc = self.cond_ids[t].to(self.device)
+            c = self.q_sample(x_start=c, t=tc, noise=torch.randn_like(c.float()))
+    return self.p_losses(x, c, t, *args, **kwargs)
+```
+
 Here z is the z0, 
 
 z0 --[q_sample](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L1014)--> zt --model--> znoise_pred
 
 calculate the loss between znoise_pred and noise(Gaussian Distribution)
 
-### Sampling process in LDM: [log_images]([https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L1217](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L1251)https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L1251) containing the zsampling and decode
+### Sampling process in LDM: [log_images](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L1251) containing the zsampling and decode
 
-
+c --sample_log--> samples --decode_first_stage--> x_samples
 
 
 
