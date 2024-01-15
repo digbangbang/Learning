@@ -290,34 +290,35 @@ calculate the loss between znoise_pred and noise(Gaussian Distribution)
 
 #### Shape change in training process(batch_size is set to 16)
 
-I have successed in training LSUN-churches(uncondition) dataset in autoencoder and latent-diffusion, so
+*I have successed in training LSUN-churches(uncondition) dataset in autoencoder and latent-diffusion, so*
 
-Take this [autoencoder](https://github.com/CompVis/latent-diffusion/blob/main/configs/autoencoder/autoencoder_kl_32x32x4.yaml) and this [latent-diffusion](https://github.com/CompVis/latent-diffusion/blob/main/configs/latent-diffusion/lsun_churches-ldm-kl-8.yaml) for example:
+*Take this [autoencoder](https://github.com/CompVis/latent-diffusion/blob/main/configs/autoencoder/autoencoder_kl_32x32x4.yaml) and this [latent-diffusion](https://github.com/CompVis/latent-diffusion/blob/main/configs/latent-diffusion/lsun_churches-ldm-kl-8.yaml) for example:*
 
-input: batch: batch['image'], batch[''](some conditions) (LSUN just has the image, with no condition)
+Input: batch: batch['image'], batch[''](some conditions) (LSUN just has the image, with no condition)
 
 - batch['image'] (16,256,256,3) 
 
---self.get_input(batch, self.first_stage_key)--> x(16,4,32,32), c(None)
+--`self.get_input(batch, self.first_stage_key)`--> x(16,4,32,32), c(None)
 
---torch.randint()--> t(16)
+--`torch.randint()`--> t(16)
 
---torch.randn_like(x)--> noise(16,4,32,32)
+--`torch.randn_like(x)`--> noise(16,4,32,32)
 
---self.q_sample(x, t, noise)--> x_noisy(16,4,32,32)
+--`self.q_sample(x, t, noise)`--> x_noisy(16,4,32,32)
 
---self.model(x_noisy, t, c)--> model_output(16,4,32,32)
+--`self.model(x_noisy, t, c)`--> model_output(16,4,32,32)
 
---self.get_loss(model_output, noise)--> loss_simple(16)
+--`self.get_loss(model_output, noise)`--> loss_simple(16)
 
---loss.mean()--> loss(1)
-
+--`loss.mean()`--> loss(1)
 
 ### Sampling process in LDM: [log_images](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L1251) containing the zsampling and decode
 
 c --sample_log--> samples --decode_first_stage--> x_samples
 
+*The shape changes in sampling process is just like the changes in training process, and one different is that*
 
+*z(batch_size,4,32,32)--`self.decode_first_stage(samples)`-->image_out(batch_size,256,256,3)*
 
 
 
