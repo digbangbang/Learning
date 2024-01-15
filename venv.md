@@ -32,3 +32,7 @@ Python:select interpreter
     q -- quit debug
     ...
 
+**Using the code below to set breakpoint** 
+```python
+import pdb; pdb.set_trace()
+```
