@@ -32,4 +32,4 @@ $$\begin{aligned}
 &=-\nabla_\theta L(z_{\mathrm{test}},\hat{\theta})^\top H_{\hat{\theta}}^{-1}\nabla_\theta L(z,\hat{\theta})
 \end{aligned}$$
 
-
+It can be seen from influence function(z) $\frac{d \hat{\theta}_ {\epsilon, z}}{d \epsilon}=\frac{d \Delta_\epsilon}{d \epsilon}$. Apply an influence $\epsilon$ to the data point $z$, the larger the influence function is, the greater the influence $z$ has on $z_{test}$.
