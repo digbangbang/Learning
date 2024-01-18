@@ -1,6 +1,6 @@
 # This .md contains the paper reading from 2024~
 
-## 📖 Understanding Black-box Predictions via Influence Functions
+## 📖 [Understanding Black-box Predictions via Influence Functions](https://arxiv.org/abs/1703.04730)
 
 ### Influence function deriving from Appendix A.
 
@@ -36,7 +36,7 @@ It can be seen from influence function(z) $\frac{d \hat{\theta}_ {\epsilon, z}}{
 
 
 
-## 📖 DENOISING DIFFUSION IMPLICIT MODELS
+## 📖 [DENOISING DIFFUSION IMPLICIT MODELS](https://arxiv.org/abs/2010.02502)
 
 ### New inference distribution
 
@@ -127,7 +127,7 @@ def generalized_steps(x, seq, model, b, **kwargs):
     return xs, x0_preds
 ```
 
-## 📖 Improved Denoising Diffusion Probabilistic Models
+## 📖 [Improved Denoising Diffusion Probabilistic Models](https://arxiv.org/abs/2102.09672)
 
 ### Set learning Variance(denoising process) to improve log-likelihood
 
