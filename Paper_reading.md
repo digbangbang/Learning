@@ -189,6 +189,39 @@ The accerlate reason is the same as DDIM.
 
 
 
+## 📖 [Farewell to Aimless Large-scale Pretraining: Influential Subset Selection for Language Model](https://arxiv.org/abs/2305.12816)
+
+### Influence function deriving by using implicit differentiation (not from this paper) 
+
+Emprical risk: $$R(\theta) \stackrel{\text { def }}{=} \frac{1}{n} \sum L\left(z_i, \theta\right)$$
+
+Emprical Hessian $$H_{\hat{\theta}} \stackrel{\text { def }}{=} \nabla^2 R(\hat{\theta})=\frac{1}{n} \sum \nabla_\theta^2 L\left(z_i, \hat{\theta}\right)$$
+
+upweight training point $z$ to delete $z$ in emprical risk $$\hat{\theta}_{\epsilon, z}=\arg \min _{\theta \in \Theta}\{R(\theta)+\epsilon L(z, \theta)\}$$
+
+influence function is defined by $$\mathcal{I} _{\mathrm{up},\mathrm{params}}(z) \stackrel{\text { def }}{=} \left.\frac{d\hat{\theta} _{\epsilon,z}}{d\epsilon}\right| _{\epsilon=0}$$
+
+first-order optimality condition: $$0=\nabla R\left(\hat{\theta}_ {\epsilon, z}\right)+\epsilon \nabla L\left(z, \hat{\theta}_{\epsilon, z}\right)$$
+
+then define $$f(\epsilon, \hat{\theta} _{\epsilon, z}) = \nabla R\left(\hat{\theta} _{\epsilon, z}\right)+\epsilon \nabla L\left(z, \hat{\theta} _{\epsilon, z}\right) = 0$$
+
+using implicit differentiation $$\frac{\partial f(\epsilon, \hat{\theta} _{\epsilon, z})}{\partial \epsilon} +  \frac{\partial f(\epsilon, \hat{\theta} _{\epsilon, z})}{\partial \hat{\theta} _{\epsilon, z}} \cdot \frac{\partial \hat{\theta} _{\epsilon, z}}{\partial \epsilon} = 0$$
+
+so $$\frac{\partial \hat{\theta} _{\epsilon, z}}{\partial \epsilon} = -\Big[\frac{\partial f(\epsilon, \hat{\theta} _{\epsilon, z})}{\partial \hat{\theta} _{\epsilon, z}}\Big]^{-1} \cdot \frac{\partial f(\epsilon, \hat{\theta} _{\epsilon, z})}{\partial \epsilon}$$
+
+and we have $$\frac{\partial f(\epsilon, \hat{\theta} _{\epsilon, z})}{\partial \hat{\theta} _{\epsilon, z}} = \nabla _{\theta} ^{2} R\left(\hat{\theta} _{\epsilon, z}\right)+\epsilon \nabla _{\theta} ^{2} L\left(z, \hat{\theta} _{\epsilon, z}\right)$$
+
+$$\frac{\partial f(\epsilon, \hat{\theta} _{\epsilon, z})}{\partial \epsilon} = \nabla _{\epsilon} \nabla _{\theta} R\left(\hat{\theta} _{\epsilon, z}\right) + \nabla _{\theta} L\left(z, \hat{\theta} _{\epsilon, z}\right)$$
+
+finally $$\frac{\partial \hat{\theta} _{\epsilon, z}}{\partial \epsilon} = -\Big[ \nabla _{\theta} ^{2} R\left(\hat{\theta} _{\epsilon, z}\right)+\epsilon \nabla _{\theta} ^{2} L\left(z, \hat{\theta} _{\epsilon, z}\right) \Big]^{-1} \cdot \Big[\nabla _{\epsilon} \nabla _{\theta} R\left(\hat{\theta} _{\epsilon, z}\right) + \nabla _{\theta} L\left(z, \hat{\theta} _{\epsilon, z}\right)\Big]$$
+
+$$\mathcal{I} _{\mathrm{up},\mathrm{params}}(z) \stackrel{\text { def }}{=} \left.\frac{d\hat{\theta} _{\epsilon,z}}{d\epsilon}\right| _{\epsilon=0} = -H _{\hat{\theta}}^{-1}\nabla L(z,\hat{\theta})$$
+
+
+
+
+
+
 
 
 
