@@ -42,8 +42,7 @@ import pdb; pdb.set_trace()
 ### dependent
 ```bash
 pip install -U huggingface_hub
-pip install -U hf-transfer
-export HF_HUB_ENABLE_HF_TRANSFER=1
+export HF_ENDPOINT=https://hf-mirror.com
 ```
 
 ### download model
