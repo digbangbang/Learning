@@ -217,7 +217,23 @@ finally $$\frac{\partial \hat{\theta} _{\epsilon, z}}{\partial \epsilon} = -\Big
 
 $$\mathcal{I} _{\mathrm{up},\mathrm{params}}(z) \stackrel{\text { def }}{=} \left.\frac{d\hat{\theta} _{\epsilon,z}}{d\epsilon}\right| _{\epsilon=0} = -H _{\hat{\theta}}^{-1}\nabla L(z,\hat{\theta})$$
 
-### Influence Approximation 如何判断数据影响
+### Influence Approximation
+
+Hypothesize that the influences of all training examples (pre-training) $z_p$ on a fixed test point(end-task training) $z_t$ is exactly the total reduction in loss on $z_t$
+
+Minizing $l_p(z_p;\theta,\phi)$ via an iterative optimization procedure (such as $SGD$) which utilizes one training example $z_p$ in iteration $t$. In iteration $t$, $\theta_t$ goes to $\theta_{t+1}$.
+
+The influence of $z_p$ on $z_t$ can be approximated below: $$\mathcal{I}\left(z_{p},z_{t}\right)=l_{t}\left(z_{t},\theta_{t}\right)-l_{t}\left(z_{t},\theta_{t+1}\right)$$
+
+make a first-Taylor expansion of $l_t(z_t,\theta_{t+1})$ at $\theta_t$
+
+$$l_t\left(z_t,\theta_{t+1}\right)= l_{t}\left(z_{t},\theta_{t}\right)+\nabla_{\theta}l_{t}\left(z_{t},\theta_{t}\right)\cdot\left(\theta_{t+1}-\theta_{t}\right) + O\left(\|\theta_{t+1}-\theta_t\|^2\right)$$
+
+using $SGD$ as the optimizer, the update in parameters is $\theta_{t+1} - \theta_{t} = -\eta_t \nabla_{\theta}l_p(z_p,\theta_t)$
+
+disregarding the higher-order, the influence of $z_p$ on $z_t$(below algorithm using validation $z^{\prime}$) is  
+
+$$l_t\left(z_t,\theta_t\right)-l_t\left(z_t,\theta_{t+1}\right)\approx\eta_t\nabla_\theta l_t\left(z_t,\theta_t\right)\cdot\nabla_\theta l_p\left(z_p,\theta_t\right)$$
 
 ### Algorithm(from paper)
 
