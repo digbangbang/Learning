@@ -36,3 +36,29 @@ Python:select interpreter
 ```python
 import pdb; pdb.set_trace()
 ```
+
+## Huggingface download(Linux)
+
+### dependent
+```bash
+pip install -U huggingface_hub
+pip install -U hf-transfer
+export HF_HUB_ENABLE_HF_TRANSFER=1
+```
+
+### download model
+```bash
+huggingface-cli download --resume-download --repo-type model --local-dir-use-symlinks False bigscience/bloom-560m --local-dir bloom-560m
+```
+
+### download dataset
+```
+huggingface-cli download --resume-download --repo-type dataset --local-dir-use-symlinks False dataset lavita/medical-qa-shared-task-v1-toy --local-dir data
+```
+
+
+
+
+
+
+
