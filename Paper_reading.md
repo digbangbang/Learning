@@ -217,14 +217,18 @@ finally $$\frac{\partial \hat{\theta} _{\epsilon, z}}{\partial \epsilon} = -\Big
 
 $$\mathcal{I} _{\mathrm{up},\mathrm{params}}(z) \stackrel{\text { def }}{=} \left.\frac{d\hat{\theta} _{\epsilon,z}}{d\epsilon}\right| _{\epsilon=0} = -H _{\hat{\theta}}^{-1}\nabla L(z,\hat{\theta})$$
 
+### Influence Approximation 如何判断数据影响
 
+### Experiment reproduction(using [TLM-HYPERPARTISAN](https://huggingface.co/datasets/yxchar/hyp-tlm/tree/main) dataset)
 
+#### Data Usage(数据用途：预训练语料库（大小），下游任务（训练集，测试集，验证集）)
 
+#### Model initialization and Training(Using end-task training dataset)
 
+#### Get ISS (使用上面的训练模型，选择使用第几层梯度近似，使用预训练语料库与下游任务训练集计算梯度，以计算ISS)
 
+#### 预训练语料库数据选择
 
-
-
-
+#### 进行下一步训练或者微调
 
 
