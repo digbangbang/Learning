@@ -50,10 +50,29 @@ export HF_ENDPOINT=https://hf-mirror.com
 huggingface-cli download --resume-download --repo-type model --local-dir-use-symlinks False bigscience/bloom-560m --local-dir bloom-560m
 ```
 
+or below, when using below, u could not change the code in `.from_pretrained()` The dataset will be saved in ~/.cache/huggingface
+```bash
+huggingface-cli download --resume-download --repo-type model bigscience/bloom-560m
+```
+
 ### download dataset
 ```
 huggingface-cli download --resume-download --repo-type dataset --local-dir-use-symlinks False dataset lavita/medical-qa-shared-task-v1-toy --local-dir data
 ```
+
+or below. The dataset will be saved in ~/.cache/huggingface
+```
+huggingface-cli download --resume-download --repo-type dataset dataset lavita/medical-qa-shared-task-v1-toy
+```
+
+
+
+
+
+
+
+
+
 
 
 
