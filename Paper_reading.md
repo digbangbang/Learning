@@ -219,11 +219,32 @@ $$\mathcal{I} _{\mathrm{up},\mathrm{params}}(z) \stackrel{\text { def }}{=} \lef
 
 ### Influence Approximation 如何判断数据影响
 
-### Experiment reproduction(using [TLM-HYPERPARTISAN](https://huggingface.co/datasets/yxchar/hyp-tlm/tree/main) dataset)
+### Algorithm(from paper)
 
-#### Data Usage(数据用途：预训练语料库（大小），下游任务（训练集，测试集，验证集）)
+<p align="center">
+  <img src="https://github.com/digbangbang/Learning/assets/78746384/aa8368ab-75b6-44c3-b6f1-d370f7b561a9" alt="legend" width="450" height="600">
+</p>
+
+### Experiment reproduction (using [TLM-HYPERPARTISAN](https://huggingface.co/datasets/yxchar/hyp-tlm/tree/main) dataset and [Bert-base-uncased](https://huggingface.co/bert-base-uncased/tree/main))
+
+The following code are from [ISS](https://github.com/nitwtog/ISS/tree/main), when using in own machine, I made some changes. First, use the latest pytorch to complete the reproduction.
+
+#### Data Usage
+
+- train.csv -> End-task training dataset
+- test.csv -> End-task testing dataset
+- dev.csv -> End-task validation dataset
+
+The end-task dataset can also used into pre-training process(in the first training process, it will use train.csv to train the Bert-base-uncased for 15 epoch)
+
+- large_external.csv -> Pre-training corpus(large)
+- small_external.csv -> Pre-training corpus(small)
 
 #### Model initialization and Training(Using end-task training dataset)
+
+What we want is to reduce the pre-training corpus(select the important subset), so obviously, it's not suitable to train the model with pre-training corpus(original). First, initializing the model and training with train.csv in 15 epoch or less. 
+    
+    bash train_score_model.sh
 
 #### Get ISS (使用上面的训练模型，选择使用第几层梯度近似，使用预训练语料库与下游任务训练集计算梯度，以计算ISS)
 
