@@ -262,10 +262,26 @@ What we want is to reduce the pre-training corpus(select the important subset), 
     
     bash train_score_model.sh
 
-#### Get ISS (使用上面的训练模型，选择使用第几层梯度近似，使用预训练语料库与下游任务训练集计算梯度，以计算ISS)
+**Let's see the INFO.log**
 
-#### 预训练语料库数据选择
+<p align="center">
+  <img src="https://github.com/digbangbang/Learning/assets/78746384/28e355d8-e387-4abc-b8e5-6354d7240f7d" alt="legend" width="600" height="400">
+</p>
 
-#### 进行下一步训练或者微调
+*It seems the test_loss is calculated wrong, but doesn't matter. Maybe the model is not perfect and leaving some spalce to optimize, let's ignore this and go on.*
 
+#### Get ISS (using small_external.csv for example)
 
+Changing some parameters in both documents, then begin select subset from small_external.csv.
+
+    bash get_score.sh
+    
+#### Selct topK
+
+    python select_data_byscore_for.py
+
+#### Pretraining
+
+Use the filtered unsupervised dataset and the downstream task dataset to perform the Bert model's pretraining tasks
+
+    bash train.sh
