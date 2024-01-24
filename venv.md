@@ -65,7 +65,19 @@ or below. The dataset will be saved in ~/.cache/huggingface
 huggingface-cli download --resume-download --repo-type dataset dataset lavita/medical-qa-shared-task-v1-toy
 ```
 
+## Ubuntu使用screen保持离线后程序运行
 
+创建screen
+
+    screen -S XXX
+
+查看screen
+
+    screen -ls
+
+进入screen
+
+    screen -r XXX
 
 
 
