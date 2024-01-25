@@ -285,3 +285,14 @@ Changing some parameters in both documents, then begin select subset from small_
 Use the filtered unsupervised dataset and the downstream task dataset to perform the Bert model's pretraining tasks
 
     bash train.sh
+
+**Let's see the log**
+
+I choose the iterations 50000 to 60000, and the best test macro_f1 is 0.9358
+
+<p align="center">
+  <img src="https://github.com/digbangbang/Learning/assets/78746384/e85f967a-d249-47ff-8c89-27cfe7fe3722" alt="legend" width="1000" height="200">
+</p>
+
+
+
