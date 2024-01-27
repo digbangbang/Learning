@@ -57,12 +57,12 @@ huggingface-cli download --resume-download --repo-type model bigscience/bloom-56
 
 ### download dataset
 ```
-huggingface-cli download --resume-download --repo-type dataset --local-dir-use-symlinks False dataset lavita/medical-qa-shared-task-v1-toy --local-dir data
+huggingface-cli download --resume-download --repo-type dataset --local-dir-use-symlinks False lavita/medical-qa-shared-task-v1-toy --local-dir data
 ```
 
 or below. The dataset will be saved in ~/.cache/huggingface
 ```
-huggingface-cli download --resume-download --repo-type dataset dataset lavita/medical-qa-shared-task-v1-toy
+huggingface-cli download --resume-download --repo-type dataset lavita/medical-qa-shared-task-v1-toy
 ```
 
 ## Ubuntu使用screen保持离线后程序运行
