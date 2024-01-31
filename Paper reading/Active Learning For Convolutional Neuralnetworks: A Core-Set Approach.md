@@ -1,0 +1,9 @@
+## 📖 [ACTIVE LEARNING FOR CONVOLUTIONAL NEURALNETWORKS: A CORE-SET APPROACH](https://arxiv.org/abs/1708.00489)
+
+### LEMMA 1 Proof Add
+
+
+
+### THROREM 1 Proof Add
+
+
