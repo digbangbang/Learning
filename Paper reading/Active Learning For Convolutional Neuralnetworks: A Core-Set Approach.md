@@ -58,7 +58,48 @@ We can get the target inequality.
 
 ### THROREM 1 Proof Add
 
+When we got 
+
+$$E_{y_i\sim\eta(\mathbf{x} _i)}[l(\mathbf{x} _i,y _i,A _\mathbf{s})]\leq\delta(\lambda^l+\lambda^\mu LC)$$
+
+Using Hoeffding's Inequality to proof at least $1-\gamma$:
+
+$$\left|\frac{1}{n}\sum _{i\in[n]}l(\mathbf{x} _{i},y _{i};A _{\mathbf{s}})-\frac{1}{|\mathbf{s}|}\sum _{j\in\mathbf{s}}l(\mathbf{x} _{j},y _{j};A _{\mathbf{s}})\right|\leq\delta(\lambda^{l}+\lambda^{\mu}LC)+\sqrt{\frac{L^{2}\log(1/\gamma)}{2n}}$$
+
+*Proof*
+
+First, Hoeffding's inequality(Additive), for all $\epsilon > 0$,
+
+$$\Pr(\bar{X}_n\geq\mu+\epsilon)\leq e^{-2n\epsilon^2}$$
+
+That is $$\Pr(\bar{X}_n\leq\mu+\epsilon)\geq 1 - e^{-2n\epsilon^2}$$
+
+And using the zero-training loss on $\mathbf{s}$, we got
+
+$$\left|\frac{1}{n}\sum _{i\in[n]}l(\mathbf{x} _{i},y _{i};A _{\mathbf{s}})-\frac{1}{|\mathbf{s}|}\sum _{j\in\mathbf{s}}l(\mathbf{x} _{j},y _{j};A _{\mathbf{s}})\right| = \frac{1}{n}\sum _{i\in[n]}l(\mathbf{x} _{i},y _{i};A _{\mathbf{s}})$$
+
+Put it in Hoeffding's inequality:
+
+$$\Pr( \frac{1}{n}\sum _{i\in[n]}l(\mathbf{x} _{i},y _{i};A _{\mathbf{s}}) \leq E _{y_i\sim\eta(\mathbf{x} _i)}[l(\mathbf{x} _i,y _i,A _\mathbf{s})] + \epsilon)\geq 1 - e^{-2n\epsilon^2}$$
+
+Replace $e^{-2n\epsilon^2}$ to $\gamma$, we got at least $1-\gamma$:
+
+$$\frac{1}{n}\sum _{i\in[n]}l(\mathbf{x} _{i},y _{i};A _{\mathbf{s}}) \leq E _{y_i\sim\eta(\mathbf{x} _i)}[l(\mathbf{x} _i,y _i,A _\mathbf{s})] + \sqrt{\frac{log(1/\gamma)}{2n}}$$
+
+After some tidying up we can get the final form.
+
+*End*
 
 ### What's the $\delta$ means and how to find?
+
+$\delta$: With $S$ as the data selection pool, $N$ as all data points, and all points in $S$ covered with $\delta$ as the radius, $N$ can be fully covered.
+
+There is an interesting phrase in the paper: a provided label does not help the core-set loss unless it decreases the covering radius.
+
+The article proposed a selection method that can ignore some outliers. I did not read it carefully, I'll explain the *k-Center-Greedy*(*Algorithm 1*):
+
+According to the upper bound, we only need to optimize $\delta$. The optimization idea of *Algorithm 1* is to find the shortest distance from the point of $N$ to point S respectively(which means we will get $N$ distances at all), but to cover $N$, we need the maximum value of these $N$ shortest distances to cover $N$.
+
+
 
 
