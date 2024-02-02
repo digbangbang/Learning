@@ -356,6 +356,35 @@ We can get the target inequality.
 
 ### THROREM 1 Proof Add
 
+Fix some $p$, $p^{\prime}$ $\in[0,1]$ and $y^{\prime} \in \{0,1\} $
+
+$$p_{y\sim p}(y\neq y^{\prime})\leq p_{y\sim p^{\prime}}(y\neq y^{\prime})+|p-p^{\prime}|$$
+
+Actually the paper means it is Bernoulli Distribution, let's proof:
+
+*Proof*
+
+If $y^{\prime} = 0$, 
+
+$$p_{y\sim p}(y\neq y^{\prime}) = p_{y\sim p}(y = 1) = p = p + p^{\prime} - p^{\prime} = p_{y\sim p^{\prime}}(y = 1) + p - p^{\prime} \leq p_{y\sim p^{\prime}}(y\neq y^{\prime})+|p-p^{\prime}|$$
+
+If $y^{\prime} = 1$, 
+
+$$p_{y\sim p}(y\neq y^{\prime}) = p_{y\sim p}(y = 0) = 1 - p = 1 - p + p^{\prime} - p^{\prime} = p_{y\sim p^{\prime}}(y = 0) + p - p^{\prime} \leq p_{y\sim p^{\prime}}(y\neq y^{\prime})+|p-p^{\prime}|$$
+
+
+*End*
+
+So, in the next proof, when we got: 
+
+$$\sum _{k\in[C]}p _{y _i\sim\eta _k(\mathbf{x} _i)}(y _i=k)l(\mathbf{x} _i,k;A _\mathbf{s})$$
+
+Because of the *Soft-max*, every $p_{y_i\sim\eta_k(\mathbf{x}_i)}(y_i=k)$ is a Bernoulli Distribution, using the inequality above, we can got this:
+
+$$\sum _{k\in[C]}p _{y _i\sim\eta _k(\mathbf{x} _i)}(y _i=k)l(\mathbf{x} _i,k;A _\mathbf{s}) \leq \sum _{k\in[C]}p _{y _i\sim\eta _k(\mathbf{x} _j)}(y _i=k)l(\mathbf{x} _i,k;A _\mathbf{s})+\sum _{k\in[C]}|\eta _k(\mathbf{x} _i)-\eta _k(\mathbf{x} _j)|l(\mathbf{x} _i,k;A _\mathbf{s})$$
+
+
+
 When we got 
 
 $$E_{y_i\sim\eta(\mathbf{x} _i)}[l(\mathbf{x} _i,y _i,A _\mathbf{s})]\leq\delta(\lambda^l+\lambda^\mu LC)$$
@@ -397,4 +426,3 @@ There is an interesting phrase in the paper: a provided label does not help the 
 The article proposed a selection method that can ignore some outliers. I did not read it carefully, I'll explain the *k-Center-Greedy*(*Algorithm 1*):
 
 According to the upper bound, we only need to optimize $\delta$. The optimization idea of *Algorithm 1* is to find the shortest distance from the point of $N$ to point S respectively(which means we will get $N$ distances at all), but to cover $N$, we need the maximum value of these $N$ shortest distances to cover $N$.
-
