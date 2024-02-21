@@ -83,9 +83,13 @@ huggingface-cli download --resume-download --repo-type dataset lavita/medical-qa
 
 *使用Optuna进行超参数优化*
 
+## Wandb使用注意事项
 
+服务器上有时会使用不了wandb，显示wandb.init timeout什么的
 
+    pip install urllib3==1.25.11
 
+安装这个版本之后可以解决问题
 
 
 
