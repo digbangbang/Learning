@@ -79,7 +79,9 @@ huggingface-cli download --resume-download --repo-type dataset lavita/medical-qa
 
     screen -r XXX
 
+## Optimize on Deep Learning
 
+*使用Optuna进行超参数优化*
 
 
 
