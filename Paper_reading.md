@@ -426,3 +426,12 @@ There is an interesting phrase in the paper: a provided label does not help the 
 The article proposed a selection method that can ignore some outliers. I did not read it carefully, I'll explain the *k-Center-Greedy*(*Algorithm 1*):
 
 According to the upper bound, we only need to optimize $\delta$. The optimization idea of *Algorithm 1* is to find the shortest distance from the point of $N$ to point S respectively(which means we will get $N$ distances at all), but to cover $N$, we need the maximum value of these $N$ shortest distances to cover $N$.
+
+
+
+## 📖 [Progressive Distillation for Fast Sampling of Diffusion Models](https://arxiv.org/abs/2202.00512)
+
+
+
+
+
