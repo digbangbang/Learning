@@ -432,6 +432,12 @@ According to the upper bound, we only need to optimize $\delta$. The optimizatio
 ## 📖 [Progressive Distillation for Fast Sampling of Diffusion Models](https://arxiv.org/abs/2202.00512)
 
 
+## 📖 [Score-Based Generative Modeling through Stochastic Differential Equations](https://arxiv.org/abs/2011.13456)
 
+### The Reverse SDE solution
+
+Forward process SDE
+
+$$d\boldsymbol{x}=\boldsymbol{f}_t(\boldsymbol{x})dt+g_td\boldsymbol{w}$$
 
 
