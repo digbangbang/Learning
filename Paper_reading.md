@@ -488,5 +488,7 @@ Finally we get $d\boldsymbol{x}=\left[\boldsymbol{f}_t(\boldsymbol{x})-g_t^2\nab
 Come from 苏剑林
 
 
+## 📖 [Unified Concept Editing in Diffusion Models](https://arxiv.org/abs/2308.14761)
 
+## 📖 [IP-Adapter: Text Compatible Image Prompt Adapter for Text-to-Image Diffusion Models](https://arxiv.org/abs/2308.06721)
 
