@@ -65,6 +65,8 @@ or below. The dataset will be saved in ~/.cache/huggingface
 huggingface-cli download --resume-download --repo-type dataset lavita/medical-qa-shared-task-v1-toy
 ```
 
+### 使用export HF_ENDPOINT=https://hf-mirror.com 可以直接下载模型和数据
+
 ## Ubuntu使用screen保持离线后程序运行
 
 创建screen
