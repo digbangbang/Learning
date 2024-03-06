@@ -93,9 +93,17 @@ huggingface-cli download --resume-download --repo-type dataset lavita/medical-qa
 
 安装这个版本之后可以解决问题
 
+## git上传
 
+首先git clone + URL 下来文件
 
+在clone里的文件里面进行修改
 
+    $ git add .
+
+    $ git commit -m "Add existing file"    
+
+    $ git push origin YOUR_BRANCH(main)
 
 
 
