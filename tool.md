@@ -67,7 +67,7 @@ huggingface-cli download --resume-download --repo-type dataset lavita/medical-qa
 
 ### 使用export HF_ENDPOINT=https://hf-mirror.com 可以直接下载模型和数据
 
-### --include 具体到某文件，如.ckpt, .pt
+### 添加--include 具体到某文件，如.ckpt, .pt
 
 ## Ubuntu使用screen保持离线后程序运行
 
