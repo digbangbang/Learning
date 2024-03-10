@@ -223,7 +223,7 @@ def p_losses(self, x_start, t, noise=None):
 
 In pytorch_lightning structure, `training_step` defined the training process and returned the loss.
 
-First, [LatentDiffusion class]() inherits the DDPM class, and LatentDiffusion didn't define the `training_step`. That is: LatentDiffusion continues using the DDPM's `training_step`, so let's talk about it.
+First, [LatentDiffusion class](https://github.com/CompVis/latent-diffusion/blob/a506df5756472e2ebaf9078affdde2c4f1502cd4/ldm/models/diffusion/ddpm.py#L424) inherits the DDPM class, and LatentDiffusion didn't define the `training_step`. That is: LatentDiffusion continues using the DDPM's `training_step`, so let's talk about it.
 
 #### DDPM's and LatentDiffusion's `training_step`: 
 
