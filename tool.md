@@ -107,6 +107,8 @@ huggingface-cli download --resume-download --repo-type dataset lavita/medical-qa
 
     $ git push origin YOUR_BRANCH(main)
 
+## wandb上传offline
 
+    ls | grep -E "run|offline" | grep -v latest | xargs wandb sync --no-mark-synced
 
 
