@@ -111,4 +111,6 @@ huggingface-cli download --resume-download --repo-type dataset lavita/medical-qa
 
     ls | grep -E "run|offline" | grep -v latest | xargs wandb sync --no-mark-synced
 
+## 阿里镜像
 
+    pip install -i https://mirrors.aliyun.com/pypi/simple XXX==0.0.0
