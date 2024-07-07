@@ -114,3 +114,9 @@ huggingface-cli download --resume-download --repo-type dataset lavita/medical-qa
 ## 阿里镜像
 
     pip install -i https://mirrors.aliyun.com/pypi/simple XXX==0.0.0
+
+## 下载大规模数据，使用img2dataset
+    img2dataset --url_list laion400m-meta --input_format "parquet"\
+         --url_col "URL" --caption_col "TEXT" --output_format webdataset\
+           --output_folder laion400m-data --processes_count 16 --thread_count 128 --image_size 256\
+             --save_additional_columns '["NSFW","similarity","LICENSE"]' --enable_wandb True
