@@ -120,3 +120,7 @@ huggingface-cli download --resume-download --repo-type dataset lavita/medical-qa
          --url_col "URL" --caption_col "TEXT" --output_format webdataset\
            --output_folder laion400m-data --processes_count 16 --thread_count 128 --image_size 256\
              --save_additional_columns '["NSFW","similarity","LICENSE"]' --enable_wandb True
+
+## 关于Chrome和VScode软件打开闪烁黑屏情况
+
+GPU问题，分别设置关闭两者的GPU加速，即可解决黑屏问题
